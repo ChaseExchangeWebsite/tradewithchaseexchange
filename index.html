@@ -145,8 +145,6 @@ View Services
 
 </div>
   
-<section class="trust-bar">
-  
 <div class="trust-item">
 🔒 Secure Transactions
 </div>
@@ -162,6 +160,30 @@ View Services
 <div class="trust-item">
 ⭐ Trusted by Thousands
 </div>
+
+<section class="track-order" id="track">
+
+    <div class="section-title">
+        <span>TRACK ORDER</span>
+        <h2>Track Your Transaction</h2>
+        <p>Enter your transaction reference number to check its current status.</p>
+    </div>
+
+    <div class="track-box">
+
+        <input
+            type="text"
+            id="trackingNumber"
+            placeholder="Example: CHX-2025-1048">
+
+        <button onclick="trackOrder()">
+            <i class="fas fa-search"></i>
+            Track Transaction
+        </button>
+
+        <div id="trackingResult"></div>
+
+    </div>
 
 </section>
   
@@ -517,8 +539,6 @@ Telegram
 
 </section>
 
-<section class="calculator">
-
 <div class="section-title">
 
 <h2>Exchange Calculator</h2>
@@ -565,6 +585,46 @@ Get Today's Live Rate
 </a>
   
 </div>
+
+<section class="live-rates" id="rates">
+
+    <div class="section-title">
+        <span>LIVE MARKET</span>
+        <h2>Exchange Rates</h2>
+        <p>Updated market prices for major cryptocurrencies.</p>
+    </div>
+
+    <div class="rates-container">
+
+        <div class="rate-card">
+            <h3><i class="fab fa-bitcoin"></i> Bitcoin</h3>
+            <span id="btc-price">Loading...</span>
+        </div>
+
+        <div class="rate-card">
+            <h3><i class="fab fa-ethereum"></i> Ethereum</h3>
+            <span id="eth-price">Loading...</span>
+        </div>
+
+        <div class="rate-card">
+            <h3>💲 USDT</h3>
+            <span id="usdt-price">Loading...</span>
+        </div>
+
+        <div class="rate-card">
+            <h3>🟡 BNB</h3>
+            <span id="bnb-price">Loading...</span>
+        </div>
+
+    </div>
+
+  <button class="refresh-btn" onclick="loadRates()">
+    <i class="fas fa-rotate"></i> Refresh Live Rates
+</button>
+
+<p class="last-updated">
+    Last Updated: <span id="last-updated">--</span>
+</p>
 
 </section>
 
@@ -1209,4 +1269,19 @@ Fast • Secure • Reliable Digital Exchange Services
 </footer>
 
 </body>
-</html>
+
+<div id="loader">
+
+    <div class="loader-content">
+
+        <img src="logo.png" alt="Chase Exchange Logo">
+
+        <h2>Chase Exchange</h2>
+
+        <p>Securing Your Transactions...</p>
+
+        <div class="loader-spinner"></div>
+
+    </div>
+
+</div>

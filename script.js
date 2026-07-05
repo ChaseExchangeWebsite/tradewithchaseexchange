@@ -94,4 +94,101 @@ function calculateExchange() {
     document.getElementById("result").innerHTML =
     "Estimated NGN: ₦" + result.toLocaleString();
 
+}async function loadRates(){
+
+    document.getElementById("btc-price").innerHTML="Loading...";
+    document.getElementById("eth-price").innerHTML="Loading...";
+    document.getElementById("usdt-price").innerHTML="Loading...";
+    document.getElementById("bnb-price").innerHTML="Loading...";
+
+  const now = new Date();
+
+document.getElementById("last-updated").innerHTML =
+now.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+});
+
+    try{
+
+        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin&vs_currencies=ngn");
+
+        const data = await response.json();
+
+        document.getElementById("btc-price").innerHTML="₦"+data.bitcoin.ngn.toLocaleString();
+
+        document.getElementById("eth-price").innerHTML="₦"+data.ethereum.ngn.toLocaleString();
+
+        document.getElementById("usdt-price").innerHTML="₦"+data.tether.ngn.toLocaleString();
+
+        document.getElementById("bnb-price").innerHTML="₦"+data.binancecoin.ngn.toLocaleString();
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
 }
+
+loadRates();function trackOrder(){
+
+const reference =
+document.getElementById("trackingNumber").value.trim().toUpperCase();
+
+const result =
+document.getElementById("trackingResult");
+
+if(reference===""){
+
+result.innerHTML="❌ Please enter your transaction reference.";
+
+result.style.color="#ff5555";
+
+return;
+
+}
+
+const demoOrders={
+
+"CHX-2025-1001":"🟡 Pending Confirmation",
+
+"CHX-2025-1002":"🔄 Processing",
+
+"CHX-2025-1003":"✅ Completed",
+
+"CHX-2025-1004":"❌ Cancelled"
+
+};
+
+if(demoOrders[reference]){
+
+result.innerHTML=demoOrders[reference];
+
+result.style.color="#00e69a";
+
+}else{
+
+result.innerHTML="⚠️ Reference number not found. Please contact support.";
+
+result.style.color="#ffc107";
+
+}
+
+}window.addEventListener("load", () => {
+
+    const loader = document.getElementById("loader");
+
+    if(loader){
+
+        setTimeout(() => {
+
+            loader.style.opacity = "0";
+            loader.style.visibility = "hidden";
+
+        },1500);
+
+    }
+
+});
