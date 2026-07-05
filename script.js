@@ -82,15 +82,3 @@ themeToggle.addEventListener("click", () => {
     }
 
 });
-
-window.addEventListener("load", () => {
-
-    if(localStorage.getItem("theme")==="light"){
-
-        document.body.classList.add("light-mode");
-
-        themeToggle.querySelector("i").classList.replace("fa-moon","fa-sun");
-
-    }
-
-});
