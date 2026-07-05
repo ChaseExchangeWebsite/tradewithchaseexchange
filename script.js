@@ -1,84 +1,97 @@
+/* ==========================
+   FAQ TOGGLE
+========================== */
+
 const faqs = document.querySelectorAll(".faq-question");
 
 faqs.forEach(button => {
+    button.addEventListener("click", () => {
 
-button.addEventListener("click", () => {
+        const answer = button.nextElementSibling;
 
-const answer = button.nextElementSibling;
+        if (answer.style.display === "block") {
+            answer.style.display = "none";
+        } else {
+            answer.style.display = "block";
+        }
 
-answer.style.display =
-answer.style.display === "block"
-? "none"
-: "block";
-
+    });
 });
 
-});window.addEventListener("load", function(){
 
-setTimeout(function(){
-
-document.getElementById("loader").style.opacity="0";
-
-document.getElementById("loader").style.visibility="hidden";
-
-},1000);
-
-});// Animated Counter
+/* ==========================
+   ANIMATED COUNTERS
+========================== */
 
 const counters = document.querySelectorAll(".counter");
 
-counters.forEach(counter => {
+const startCounters = () => {
 
-const updateCounter = () => {
+    counters.forEach(counter => {
 
-const target = Number(counter.getAttribute("data-target"));
-const current = Number(counter.innerText);
+        const target = parseFloat(counter.dataset.target);
 
-const increment = target / 150;
+        let count = 0;
 
-if(current < target){
+        const speed = target / 100;
 
-counter.innerText = (current + increment).toFixed(target % 1 !== 0 ? 1 : 0);
+        function updateCounter() {
 
-setTimeout(updateCounter,10);
+            count += speed;
 
-}else{
+            if (count < target) {
 
-counter.innerText = target;
+                if (Number.isInteger(target)) {
+                    counter.innerText = Math.floor(count);
+                } else {
+                    counter.innerText = count.toFixed(1);
+                }
 
-}
+                requestAnimationFrame(updateCounter);
+
+            } else {
+
+                if (Number.isInteger(target)) {
+                    counter.innerText = target;
+                } else {
+                    counter.innerText = target.toFixed(1);
+                }
+
+            }
+
+        }
+
+        updateCounter();
+
+    });
 
 };
 
-updateCounter();
+window.addEventListener("load", startCounters);
 
-});function calculateExchange(){
 
-const amount = Number(document.getElementById("amount").value);
+/* ==========================
+   EXCHANGE CALCULATOR
+========================== */
 
-const rate = Number(document.getElementById("currency").value);
+function calculateExchange() {
 
-const result = amount * rate;
+    const amount = Number(document.getElementById("amount").value);
 
-document.getElementById("result").innerHTML =
-"Estimated NGN: ₦" + result.toLocaleString();
+    const rate = Number(document.getElementById("currency").value);
 
-}const themeToggle = document.getElementById("theme-toggle");
+    if (!amount || amount <= 0) {
 
-themeToggle.addEventListener("click", () => {
+        document.getElementById("result").innerHTML =
+        "Please enter a valid amount.";
 
-    document.body.classList.toggle("light-mode");
+        return;
 
-    const icon = themeToggle.querySelector("i");
-
-    if(document.body.classList.contains("light-mode")){
-        icon.classList.remove("fa-moon");
-        icon.classList.add("fa-sun");
-        localStorage.setItem("theme","light");
-    }else{
-        icon.classList.remove("fa-sun");
-        icon.classList.add("fa-moon");
-        localStorage.setItem("theme","dark");
     }
 
-});
+    const result = amount * rate;
+
+    document.getElementById("result").innerHTML =
+    "Estimated NGN: ₦" + result.toLocaleString();
+
+}

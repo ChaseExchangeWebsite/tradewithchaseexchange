@@ -2248,4 +2248,16 @@ padding:25px;
 
 border-radius:18px;
 
+}.service-card{
+
+text-decoration:none;
+
+color:inherit;
+
+display:block;
+
+}.service-card{
+    display:block;
+    text-decoration:none;
+    color:inherit;
 }
