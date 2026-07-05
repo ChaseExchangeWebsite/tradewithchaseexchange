@@ -468,7 +468,7 @@ display:none;
 
 .logo img{
 
-width:140px;
+width:150px;
 
 }
 
@@ -2169,4 +2169,83 @@ margin-bottom:35px;
 
 font-size:18px;
 
-}/
+}//* ==========================
+   MOBILE OPTIMIZATION
+========================== */
+
+@media (max-width:768px){
+
+.hero{
+
+padding:80px 20px 50px;
+
+min-height:auto;
+
+}
+
+.hero-content{
+
+padding-top:20px;
+
+}
+
+.hero-content h1{
+
+font-size:38px;
+
+line-height:1.2;
+
+}
+
+.hero-content p{
+
+font-size:16px;
+
+line-height:1.7;
+
+margin-top:15px;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.hero-buttons a{
+
+width:100%;
+
+text-align:center;
+
+}
+
+.hero-card{
+
+margin-top:40px;
+
+}
+
+}.section-title h2{
+
+font-size:32px;
+
+}
+
+.section-title p{
+
+font-size:16px;
+
+}.service-card,
+.step-card,
+.review-card,
+.stat-card{
+
+padding:25px;
+
+border-radius:18px;
+
+}
