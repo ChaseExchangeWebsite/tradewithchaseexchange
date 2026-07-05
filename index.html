@@ -27,6 +27,10 @@
 
 <nav class="navbar">
 
+<button id="theme-toggle" class="theme-toggle">
+    <i class="fas fa-moon"></i>
+</button>
+  
 <div class="logo">
 <a href="#">
 <img src="logo.png" alt="Chase Exchange Logo">
@@ -89,76 +93,132 @@ Trade Now
 </div>
 
 </section>
-<!-- Hero -->
-<!-- SERVICES -->
 
-<!-- WHAT WE EXCHANGE -->
+<section class="status-bar">
 
-<!-- WHY CHOOSE CHASE EXCHANGE -->
+<div class="status-item">
+<i class="fas fa-circle"></i>
+<span>Online Now</span>
+</div>
 
-  <!-- HOW IT WORKS -->
+<div class="status-item">
+<i class="fas fa-bolt"></i>
+<span>Fast Response Time</span>
+</div>
 
-<section class="how-it-works">
+<div class="status-item">
+<i class="fas fa-shield-alt"></i>
+<span>Secure Transactions</span>
+</div>
 
-<div class="section-heading">
+<div class="status-item">
+<i class="fas fa-headset"></i>
+<span>24/7 Customer Support</span>
+</div>
 
-<span>HOW IT WORKS</span>
+</section>
+  
+  <span class="hero-tag">
+FAST • SECURE • TRUSTED
+</span>
+
+<h1>
+Nigeria's Trusted Digital
+Exchange Platform
+</h1>
+
+<p>
+Buy, sell and exchange cryptocurrencies, gift cards, PayPal, Cash App, Zelle, bank transfers and over 100+ digital services with fast payouts and competitive rates.
+</p>
+
+<div class="hero-buttons">
+
+<a href="https://wa.me/2349054125423"
+class="btn-primary"
+target="_blank">
+
+Trade Now
+
+</a>
+
+<a href="#services"
+class="btn-secondary">
+
+View Services
+
+</a>
+
+</div>
+  
+<section class="trust-bar">
+  
+<div class="trust-item">
+🔒 Secure Transactions
+</div>
+
+<div class="trust-item">
+⚡ Fast Payments
+</div>
+
+<div class="trust-item">
+💬 24/7 Support
+</div>
+
+<div class="trust-item">
+⭐ Trusted by Thousands
+</div>
+
+</section>
+  
+<section class="steps" id="steps">
+
+<div class="section-title">
 
 <h2>Exchange in 4 Simple Steps</h2>
-  
-<p>
-Trading with Chase Exchange is quick, secure, and hassle-free.
-</p>
+
+<p>Quick, simple and secure from start to finish.</p>
 
 </div>
 
-<div class="steps">
+<div class="steps-grid">
 
-<div class="step">
+<div class="step-card">
 
-<div class="step-number">1</div>
+<div class="step-number">01</div>
 
 <h3>Contact Us</h3>
 
-<p>
-Reach out through WhatsApp or Telegram and tell us the service you need.
-</p>
+<p>Reach us on WhatsApp or Telegram and tell us the service you need.</p>
 
 </div>
 
-<div class="step">
+<div class="step-card">
 
-<div class="step-number">2</div>
+<div class="step-number">02</div>
 
-<h3>Receive a Quote</h3>
+<h3>Get a Quote</h3>
 
-<p>
-We'll provide you with the latest exchange rate and transaction details.
-</p>
+<p>We provide you with our best exchange rate instantly.</p>
 
 </div>
 
-<div class="step">
+<div class="step-card">
 
-<div class="step-number">3</div>
+<div class="step-number">03</div>
 
 <h3>Complete the Transaction</h3>
 
-<p>
-Send your crypto, payment, or gift card using the instructions provided.
-</p>
+<p>Send your crypto, gift card, or payment using the agreed method.</p>
 
 </div>
 
-<div class="step">
+<div class="step-card">
 
-<div class="step-number">4</div>
+<div class="step-number">04</div>
 
-<h3>Get Paid</h3>
+<h3>Receive Your Payment</h3>
 
-<p>
-Receive your payment quickly through your preferred payout method.
-</p>
+<p>Your funds are sent quickly and securely to your preferred account.</p>
 
 </div>
 
@@ -228,6 +288,33 @@ We make exchanging digital assets simple, secure, and reliable with customer sat
 
 <div class="section-heading">
 
+<section class="market">
+
+<div class="section-title">
+
+<h2>Live Crypto Market</h2>
+
+<p>Track major cryptocurrency prices in real time.</p>
+
+</div>
+
+<div class="market-widget">
+
+<iframe
+src="https://widget.coinlib.io/widget?type=full_v2&theme=dark&cnt=8&pref_coin_id=1505&graph=yes"
+width="100%"
+height="620"
+scrolling="auto"
+marginwidth="0"
+marginheight="0"
+frameborder="0"
+border="0">
+</iframe>
+
+</div>
+
+</section>
+  
 <!-- ==========================
 OUR SERVICES
 ========================== -->
@@ -388,6 +475,72 @@ Telegram
 </div>
 
 </section>
+
+<section class="calculator">
+
+<div class="section-title">
+
+<h2>Exchange Calculator</h2>
+
+<p>Quick estimate before contacting us.</p>
+
+</div>
+
+<div class="calculator-box">
+
+<input
+type="number"
+id="amount"
+placeholder="Enter Amount">
+
+<select id="currency">
+
+<option value="1700">USDT</option>
+
+<option value="1700">Bitcoin</option>
+
+<option value="1700">Ethereum</option>
+
+</select>
+
+<button onclick="calculateExchange()">
+
+Calculate
+
+</button>
+
+<h3 id="result">
+
+Estimated NGN: ₦0
+
+</h3>
+
+<p class="calculator-note">
+Final rates may vary slightly depending on market conditions. Contact us on WhatsApp for the latest quote.
+</p>
+  
+<a href="https://wa.me/2349054125423" class="btn-primary">
+Get Today's Live Rate
+</a>
+  
+</div>
+
+</section>
+
+  <section class="more-services">
+
+<h2>Need a Service Not Listed?</h2>
+
+<p>
+Chase Exchange provides over <strong>100+ digital exchange services.</strong>
+If you can't find the exact service you're looking for, simply send us a message on WhatsApp and we'll assist you immediately.
+</p>
+
+<a href="https://wa.me/2349054125423" class="btn-primary" target="_blank">
+💬 Chat With Us on WhatsApp
+</a>
+
+  </section>
   
 <!-- HERO -->
 
@@ -755,36 +908,24 @@ Simply contact us through WhatsApp or Telegram. We provide many additional servi
 
 <section class="stats">
 
-<div class="stat-box">
-
-<h2>10K+</h2>
-
-<p>Successful Trades</p>
-
-</div>
-
-<div class="stat-box">
-
-<h2>5K+</h2>
-
-<p>Happy Customers</p>
-
-</div>
-
-<div class="stat-box">
-
-<h2>24/7</h2>
-
-<p>Customer Support</p>
-
-</div>
-
-<div class="stat-box">
-
-<h2>99.9%</h2>
-
+<div class="stat-card">
+<h2 class="counter" data-target="10000">0</h2>
 <p>Successful Transactions</p>
+</div>
 
+<div class="stat-card">
+<h2 class="counter" data-target="5000">0</h2>
+<p>Happy Customers</p>
+</div>
+
+<div class="stat-card">
+<h2 class="counter" data-target="24">0</h2>
+<p>Hours Support</p>
+</div>
+
+<div class="stat-card">
+<h2 class="counter" data-target="99.9">0</h2>
+<p>% Success Rate</p>
 </div>
 
 </section>
@@ -839,6 +980,32 @@ We're available 24/7 to help you exchange cryptocurrency, digital payment platfo
 
 </section>
 
+<section class="trust-section">
+
+<h2>Why Customers Trust Chase Exchange</h2>
+
+<div class="trust-grid">
+
+<div class="trust-card">
+🔒 Secure Transactions
+</div>
+
+<div class="trust-card">
+⚡ Fast Payments
+</div>
+
+<div class="trust-card">
+💰 Competitive Rates
+</div>
+
+<div class="trust-card">
+💬 24/7 Support
+</div>
+
+</div>
+
+</section>
+  
 <!-- ==========================
 FOOTER
 ========================== -->
@@ -938,7 +1105,71 @@ Fast. Reliable. Secure.
 </div>
 
 </footer>
+  <!-- Floating Contact Buttons -->
+
+<div class="floating-buttons">
+
+<a href="https://wa.me/2349054125423"
+target="_blank"
+class="floating-whatsapp">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+<a href="https://t.me/tradewithchaseexchange"
+target="_blank"
+class="floating-telegram">
+
+<i class="fab fa-telegram-plane"></i>
+
+</a>
+
+</div>
   
 <script src="script.js"></script>
 
 </body>
+  
+<div id="loader">
+
+<img src="logo.png" alt="Chase Exchange">
+
+</div>
+<footer class="footer">
+
+<img src="logo.png" alt="Chase Exchange Logo" class="footer-logo">
+
+<h2>CHASE EXCHANGE</h2>
+
+<p>
+Fast • Secure • Reliable Digital Exchange Services
+</p>
+
+<div class="footer-links">
+
+<a href="#services">Services</a>
+
+<a href="#reviews">Reviews</a>
+
+<a href="#faq">FAQ</a>
+
+<a href="#contact">Contact</a>
+
+</div>
+
+<div class="footer-social">
+
+<a href="https://wa.me/2349054125423"><i class="fab fa-whatsapp"></i></a>
+
+<a href="https://t.me/YOUR_USERNAME"><i class="fab fa-telegram-plane"></i></a>
+
+</div>
+
+<p class="copyright">
+
+© 2025 Chase Exchange. All Rights Reserved.
+
+</p>
+
+</footer>
