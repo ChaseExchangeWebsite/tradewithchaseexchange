@@ -1,0 +1,5 @@
+User-agent: *
+
+Allow: /
+
+Sitemap: https://chaseexchangewebsite.github.io/tradewithchaseexchange/sitemap.xml
