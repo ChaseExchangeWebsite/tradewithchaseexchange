@@ -220,7 +220,7 @@ function loadTransactions() {
 
             table.innerHTML += `
 <tr>
-    <td>${doc.id.substring(0,8).toUpperCase()}</td>
+    <td>${data.reference || doc.id.substring(0,8).toUpperCase()}</td>
     <td>${data.customer}</td>
     <td>${data.service}</td>
     <td>₦${Number(data.amount).toLocaleString()}</td>
@@ -626,6 +626,38 @@ function searchTransactions() {
         const rowText = rows[i].innerText.toLowerCase();
 
         if (rowText.includes(input)) {
+
+            rows[i].style.display = "";
+
+        } else {
+
+            rows[i].style.display = "none";
+
+        }
+
+    }
+
+}
+// ==========================
+// Search Transactions
+// ==========================
+
+function searchTransactions() {
+
+    const search = document
+        .getElementById("searchTransaction")
+        .value
+        .toLowerCase();
+
+    const rows = document
+        .getElementById("transactionTable")
+        .getElementsByTagName("tr");
+
+    for (let i = 0; i < rows.length; i++) {
+
+        const text = rows[i].innerText.toLowerCase();
+
+        if (text.includes(search)) {
 
             rows[i].style.display = "";
 
