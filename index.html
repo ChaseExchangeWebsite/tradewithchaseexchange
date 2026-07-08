@@ -41,8 +41,6 @@
   
 </head>
 
-<>
-
 <!-- Navigation -->
 
 <nav class="navbar">
@@ -1251,7 +1249,7 @@ class="floating-telegram">
   
 <script src="script.js"></script>
 
-<footer class="footer">
+< class="footer">
 
 <img src="logo.png" alt="Chase Exchange Logo" class="footer-logo">
 
@@ -1289,8 +1287,6 @@ Fast • Secure • Reliable Digital Exchange Services
 
 </footer>
 
-</body>
-
 <div id="loader">
 
     <div class="loader-content">
@@ -1306,3 +1302,25 @@ Fast • Secure • Reliable Digital Exchange Services
     </div>
 
 </div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyDSu_PnEweLIf66tWUh6rxGmJj7PM1s28A",
+    authDomain: "chase-exchange.firebaseapp.com",
+    projectId: "chase-exchange",
+    storageBucket: "chase-exchange.firebasestorage.app",
+    messagingSenderId: "749594140408",
+    appId: "1:749594140408:web:1f1bdc5f82fe76f91ca50d"
+};
+
+firebase.initializeApp(firebaseConfig);
+window.db = firebase.firestore();
+</script>
+
+<script src="script.js"></script>
+
+</body>

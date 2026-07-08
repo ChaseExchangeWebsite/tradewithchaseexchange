@@ -132,51 +132,70 @@ now.toLocaleTimeString([], {
 
 }
 
-loadRates();function trackOrder(){
+loadRates();async function trackOrder() {
 
-const reference =
-document.getElementById("trackingNumber").value.trim().toUpperCase();
+    const reference = document
+        .getElementById("trackingNumber")
+        .value
+        .trim()
+        .toUpperCase();
 
-const result =
-document.getElementById("trackingResult");
+    const result = document.getElementById("trackingResult");
 
-if(reference===""){
+    if (reference === "") {
 
-result.innerHTML="❌ Please enter your transaction reference.";
+        result.innerHTML = "❌ Please enter your transaction reference.";
+        result.style.color = "#ff5555";
+        return;
 
-result.style.color="#ff5555";
+    }
 
-return;
+    try {
+
+        const snapshot = await db.collection("transactions")
+            .where("reference", "==", reference)
+            .get();
+
+        if (snapshot.empty) {
+
+            result.innerHTML =
+                "⚠️ Transaction reference not found.";
+
+            result.style.color = "#ffc107";
+            return;
+
+        }
+
+        snapshot.forEach(doc => {
+
+            const data = doc.data();
+
+            result.innerHTML = `
+<b>Reference:</b> ${data.reference}<br>
+<b>Customer:</b> ${data.customer}<br>
+<b>Service:</b> ${data.service}<br>
+<b>Amount:</b> ₦${Number(data.amount).toLocaleString()}<br>
+<b>Status:</b> ${data.status}
+            `;
+
+            result.style.color = "#00e69a";
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        result.innerHTML =
+            "❌ Unable to load transaction.";
+
+        result.style.color = "#ff5555";
+
+    }
 
 }
 
-const demoOrders={
-
-"CHX-2025-1001":"🟡 Pending Confirmation",
-
-"CHX-2025-1002":"🔄 Processing",
-
-"CHX-2025-1003":"✅ Completed",
-
-"CHX-2025-1004":"❌ Cancelled"
-
-};
-
-if(demoOrders[reference]){
-
-result.innerHTML=demoOrders[reference];
-
-result.style.color="#00e69a";
-
-}else{
-
-result.innerHTML="⚠️ Reference number not found. Please contact support.";
-
-result.style.color="#ffc107";
-
-}
-
-}window.addEventListener("load", () => {
+window.addEventListener("load", () => {
 
     const loader = document.getElementById("loader");
 
