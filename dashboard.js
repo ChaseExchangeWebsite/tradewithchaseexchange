@@ -107,7 +107,7 @@ closeRateBtn.addEventListener("click", () => {
     // ----------------------
 
     saveBtn.addEventListener("click", async () => {
-
+      
         const customer = document.getElementById("customerName").value.trim();
 
         const service = document.getElementById("service").value;
@@ -202,21 +202,46 @@ function loadTransactions() {
         table.innerHTML = "";
 
         let totalOrders = 0;
-        let totalRevenue = 0;
-        let pendingOrders = 0;
-        const customers = new Set();
+let totalRevenue = 0;
+let pendingOrders = 0;
+let completedOrders = 0;
+let todayRevenue = 0;
+let todayOrders = 0;
+const customers = new Set();
+const serviceCount = {};
 
         snapshot.forEach(doc => {
 
-            const data = doc.data();
-
+          const data = doc.data();
+          
             totalOrders++;
-            totalRevenue += Number(data.amount);
-            customers.add(data.customer);
+totalRevenue += Number(data.amount);
+customers.add(data.customer);
 
-            if (data.status === "Pending") {
-                pendingOrders++;
-            }
+// Count services
+serviceCount[data.service] =
+(serviceCount[data.service] || 0) + 1;
+
+// Pending
+if (data.status === "Pending") {
+    pendingOrders++;
+}
+
+// Completed
+if (data.status === "Completed") {
+    completedOrders++;
+}
+
+// Today's transactions
+const today = new Date().toDateString();
+
+if (
+    data.createdAt &&
+    data.createdAt.toDate().toDateString() === today
+) {
+    todayOrders++;
+    todayRevenue += Number(data.amount);
+}
 
             table.innerHTML += `
 <tr>
@@ -250,11 +275,81 @@ function loadTransactions() {
         });
 
         document.getElementById("totalOrders").innerText = totalOrders;
-        document.getElementById("totalRevenue").innerText =
-            "₦" + totalRevenue.toLocaleString();
+        let revenueDisplay = "";
+
+if (totalRevenue >= 1000000000) {
+
+    revenueDisplay = "₦" + (totalRevenue / 1000000000).toFixed(1) + "B";
+
+} else if (totalRevenue >= 1000000) {
+
+    revenueDisplay = "₦" + (totalRevenue / 1000000).toFixed(1) + "M";
+
+} else if (totalRevenue >= 1000) {
+
+    revenueDisplay = "₦" + (totalRevenue / 1000).toFixed(1) + "K";
+
+} else {
+
+    revenueDisplay = "₦" + totalRevenue.toLocaleString();
+
+}
+
+document.getElementById("totalRevenue").innerText = revenueDisplay;
         document.getElementById("totalCustomers").innerText = customers.size;
         document.getElementById("pendingOrders").innerText = pendingOrders;
+// ==========================
+// Today's Summary
+// ==========================
 
+document.getElementById("todayOrders").innerText = todayOrders;
+
+// Format Today's Revenue
+let todayRevenueDisplay = "";
+
+if (todayRevenue >= 1000000000) {
+
+    todayRevenueDisplay =
+        "₦" + (todayRevenue / 1000000000).toFixed(1) + "B";
+
+} else if (todayRevenue >= 1000000) {
+
+    todayRevenueDisplay =
+        "₦" + (todayRevenue / 1000000).toFixed(1) + "M";
+
+} else if (todayRevenue >= 1000) {
+
+    todayRevenueDisplay =
+        "₦" + (todayRevenue / 1000).toFixed(1) + "K";
+
+} else {
+
+    todayRevenueDisplay = "₦" + todayRevenue.toLocaleString();
+
+}
+
+document.getElementById("todayRevenue").innerText =
+    todayRevenueDisplay;
+
+document.getElementById("completedOrders").innerText =
+    completedOrders;
+
+// Most Used Service
+let topService = "-";
+let highest = 0;
+
+for (const service in serviceCount) {
+
+    if (serviceCount[service] > highest) {
+
+        highest = serviceCount[service];
+        topService = service;
+
+    }
+
+}
+
+document.getElementById("topService").innerText = topService;
     });
 
 }
@@ -658,6 +753,41 @@ function searchTransactions() {
         const text = rows[i].innerText.toLowerCase();
 
         if (text.includes(search)) {
+
+            rows[i].style.display = "";
+
+        } else {
+
+            rows[i].style.display = "none";
+
+        }
+
+    }
+
+}
+// ==========================
+// Filter Transactions
+// ==========================
+
+function filterTransactions(status) {
+
+    const rows = document
+        .getElementById("transactionTable")
+        .getElementsByTagName("tr");
+
+    for (let i = 0; i < rows.length; i++) {
+
+        if (status === "all") {
+
+            rows[i].style.display = "";
+
+            continue;
+
+        }
+
+        const rowText = rows[i].innerText.toLowerCase();
+
+        if (rowText.includes(status.toLowerCase())) {
 
             rows[i].style.display = "";
 

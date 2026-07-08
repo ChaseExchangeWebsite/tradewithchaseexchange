@@ -145,6 +145,36 @@
 
       </div>
 
+      <div class="summary-panel">
+
+    <h2>📊 Today's Summary</h2>
+
+    <div class="summary-grid">
+
+        <div class="summary-item">
+            <span>Today's Revenue</span>
+            <strong id="todayRevenue">₦0</strong>
+        </div>
+
+        <div class="summary-item">
+            <span>Today's Transactions</span>
+            <strong id="todayOrders">0</strong>
+        </div>
+
+        <div class="summary-item">
+            <span>Most Used Service</span>
+            <strong id="topService">-</strong>
+        </div>
+
+        <div class="summary-item">
+            <span>Completed Orders</span>
+            <strong id="completedOrders">0</strong>
+        </div>
+
+    </div>
+
+      </div>
+
         <div class="analytics">
 
     <div class="chart-card">
@@ -206,6 +236,30 @@
 
               </div>
               
+              <div class="filter-buttons">
+
+    <button onclick="filterTransactions('all')">
+        All
+    </button>
+
+    <button onclick="filterTransactions('pending')">
+        Pending
+    </button>
+
+    <button onclick="filterTransactions('processing')">
+        Processing
+    </button>
+
+    <button onclick="filterTransactions('completed')">
+        Completed
+    </button>
+
+    <button onclick="filterTransactions('cancelled')">
+        Cancelled
+    </button>
+
+              </div>
+              
             </thead>
 
             <tbody id="transactionTable">
@@ -238,6 +292,12 @@
 
         <input type="number" id="amount" placeholder="Amount">
 
+      <select id="status">
+    <option value="Pending">Pending</option>
+    <option value="Processing">Processing</option>
+    <option value="Completed">Completed</option>
+      </select>
+      
         <div class="form-group">
 
     <label for="paymentProof">Payment Proof (Optional)</label>
