@@ -14,13 +14,12 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-alert("Firebase initialized");
 
 const db = firebase.firestore();
+const storage = firebase.storage();
 const auth = firebase.auth();
 
 console.log("Firebase Connected");
-alert("THIS IS THE NEW FILE");
 // ==========================
 // Dashboard Ready
 // ==========================
@@ -126,10 +125,28 @@ closeRateBtn.addEventListener("click", () => {
         }
 
         try {
-
-            // Generate transaction reference
+          
+// Generate transaction reference
 const reference =
 "CHX-" + Date.now().toString().slice(-5);
+
+// Upload payment proof (if selected)
+let paymentProofURL = "";
+
+const paymentFile =
+document.getElementById("paymentProof").files[0];
+
+if (paymentFile) {
+
+    const storageRef = storage
+        .ref()
+        .child("payment-proofs/" + Date.now() + "-" + paymentFile.name);
+
+    await storageRef.put(paymentFile);
+
+    paymentProofURL = await storageRef.getDownloadURL();
+
+}
 
 await db.collection("transactions").add({
 
@@ -143,10 +160,12 @@ await db.collection("transactions").add({
 
     status: status,
 
+    paymentProof: paymentProofURL,
+
     createdAt: firebase.firestore.FieldValue.serverTimestamp()
 
 });
-
+          
 alert("Transaction Added Successfully!\nReference: " + reference);
 
             alert("Transaction Saved!");
@@ -585,5 +604,37 @@ function editRate(service, buyRate, sellRate) {
     document.getElementById("buyRate").value = buyRate;
 
     document.getElementById("sellRate").value = sellRate;
+
+}
+// ==========================
+// Search Transactions
+// ==========================
+
+function searchTransactions() {
+
+    const input = document
+        .getElementById("searchTransaction")
+        .value
+        .toLowerCase();
+
+    const table = document.getElementById("transactionsTable");
+
+    const rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+
+        const rowText = rows[i].innerText.toLowerCase();
+
+        if (rowText.includes(input)) {
+
+            rows[i].style.display = "";
+
+        } else {
+
+            rows[i].style.display = "none";
+
+        }
+
+    }
 
 }
