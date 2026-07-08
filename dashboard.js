@@ -259,12 +259,14 @@ if (
         <button
             class="view-btn"
             onclick="viewTransaction(
-                '${doc.id}',
-                '${data.reference || doc.id.substring(0,8).toUpperCase()}',
-                '${data.customer}',
-                '${data.service}',
-                '${data.amount}',
-                '${data.status}'
+    '${doc.id}',
+    '${data.reference || doc.id.substring(0,8).toUpperCase()}',
+    '${data.customer}',
+    '${data.service}',
+    '${data.amount}',
+    '${data.status}',
+    '${data.paymentProof || ""}'
+)"
             )">
             View
         </button>
@@ -367,7 +369,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 let selectedTransactionId = "";
 
-function viewTransaction(id, reference, customer, service, amount, status) {
+function viewTransaction(id, reference, customer, service, amount, status, paymentProof) {
 
     selectedTransactionId = id;
 
@@ -378,6 +380,22 @@ function viewTransaction(id, reference, customer, service, amount, status) {
         Number(amount).toLocaleString();
     document.getElementById("viewStatus").innerText = status;
 
+  const proofContainer =
+document.getElementById("paymentProofContainer");
+
+if (paymentProof) {
+
+    proofContainer.innerHTML = `
+        <img src="${paymentProof}"
+             style="max-width:100%;border-radius:10px;margin-top:10px;">
+    `;
+
+} else {
+
+    proofContainer.innerHTML =
+        "<p>No payment proof uploaded.</p>";
+
+}
     document.getElementById("viewModal").style.display = "flex";
 
 }
