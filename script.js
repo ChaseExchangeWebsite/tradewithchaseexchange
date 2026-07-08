@@ -199,15 +199,21 @@ window.addEventListener("load", () => {
 
     const loader = document.getElementById("loader");
 
-    if(loader){
+    if (loader) {
 
         setTimeout(() => {
 
             loader.style.opacity = "0";
             loader.style.visibility = "hidden";
 
-        },1500);
+        }, 1500);
 
     }
+
+    // Load rates immediately
+    loadRates();
+
+    // Refresh every 10 seconds
+    setInterval(loadRates, 10000);
 
 });
