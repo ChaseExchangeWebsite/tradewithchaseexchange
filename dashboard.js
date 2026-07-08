@@ -14,6 +14,8 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+let transactionChart = null;
+let serviceChart = null;
 
 const db = firebase.firestore();
 const storage = firebase.storage();
@@ -209,10 +211,22 @@ let todayRevenue = 0;
 let todayOrders = 0;
 const customers = new Set();
 const serviceCount = {};
-
+const dailyTransactions = {};
+      
         snapshot.forEach(doc => {
 
           const data = doc.data();
+          
+          if (data.createdAt) {
+
+    const day = data.createdAt
+        .toDate()
+        .toLocaleDateString();
+
+    dailyTransactions[day] =
+        (dailyTransactions[day] || 0) + 1;
+
+          }
           
             totalOrders++;
 totalRevenue += Number(data.amount);
@@ -352,6 +366,69 @@ for (const service in serviceCount) {
 }
 
 document.getElementById("topService").innerText = topService;
+
+      // ==========================
+// Transaction Trend Chart
+// ==========================
+
+const labels = Object.keys(dailyTransactions).sort();
+const values = labels.map(day => dailyTransactions[day]);
+
+if (transactionChart) {
+    transactionChart.destroy();
+}
+
+const ctx = document
+    .getElementById("transactionChart")
+    .getContext("2d");
+
+transactionChart = new Chart(ctx, {
+    type: "line",
+    data: {
+        labels: labels,
+        datasets: [{
+            label: "Transactions",
+            data: values,
+            borderWidth: 3,
+            tension: 0.3,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+      // ==========================
+// Service Distribution Chart
+// ==========================
+
+const serviceLabels = Object.keys(serviceCount);
+const serviceValues = serviceLabels.map(
+    service => serviceCount[service]
+);
+
+if (serviceChart) {
+    serviceChart.destroy();
+}
+
+const serviceCtx = document
+    .getElementById("serviceChart")
+    .getContext("2d");
+
+serviceChart = new Chart(serviceCtx, {
+    type: "pie",
+    data: {
+        labels: serviceLabels,
+        datasets: [{
+            data: serviceValues
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
     });
 
 }
