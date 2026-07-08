@@ -179,7 +179,23 @@
 
     <div class="chart-card">
 
-        <h3>Transaction Trend</h3>
+        <div class="chart-header">
+
+    <h3>Transaction Trend</h3>
+
+    <select id="chartFilter">
+
+        <option value="7">Last 7 Days</option>
+
+        <option value="30">Last 30 Days</option>
+
+        <option value="365">This Year</option>
+
+        <option value="all">All Time</option>
+
+    </select>
+
+        </div>
 
         <canvas id="transactionChart"></canvas>
 
@@ -428,6 +444,8 @@
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 <script src="dashboard.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 </html>

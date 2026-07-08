@@ -387,16 +387,41 @@ transactionChart = new Chart(ctx, {
     data: {
         labels: labels,
         datasets: [{
-            label: "Transactions",
-            data: values,
-            borderWidth: 3,
-            tension: 0.3,
-            fill: false
-        }]
+    label: "Transactions",
+    data: values,
+    borderColor: "#2563eb",
+    backgroundColor: "rgba(37,99,235,0.15)",
+    borderWidth: 3,
+    pointRadius: 5,
+    pointHoverRadius: 7,
+    pointBackgroundColor: "#2563eb",
+    tension: 0.35,
+    fill: true
+}]
     },
     options: {
-        responsive: true,
-        maintainAspectRatio: false
+    responsive: true,
+    maintainAspectRatio: false,
+
+    animation: {
+        duration: 1200,
+        easing: "easeOutQuart"
+    },
+
+    plugins: {
+        legend: {
+            display: true,
+            position: "top"
+        },
+        tooltip: {
+            enabled: true,
+            backgroundColor: "#111827",
+            titleColor: "#ffffff",
+            bodyColor: "#ffffff",
+            padding: 12,
+            cornerRadius: 8
+        }
+    }
     }
 });
       // ==========================
@@ -421,12 +446,41 @@ serviceChart = new Chart(serviceCtx, {
     data: {
         labels: serviceLabels,
         datasets: [{
-            data: serviceValues
-        }]
+    data: serviceValues,
+    backgroundColor: [
+        "#2563eb",
+        "#10b981",
+        "#f59e0b",
+        "#ef4444",
+        "#8b5cf6",
+        "#06b6d4",
+        "#f97316",
+        "#14b8a6"
+    ]
+}]
     },
     options: {
-        responsive: true,
-        maintainAspectRatio: false
+    responsive: true,
+    maintainAspectRatio: false,
+
+    animation: {
+        duration: 1200,
+        easing: "easeOutQuart"
+    },
+
+    plugins: {
+        legend: {
+            position: "bottom"
+        },
+        tooltip: {
+            enabled: true,
+            backgroundColor: "#111827",
+            titleColor: "#ffffff",
+            bodyColor: "#ffffff",
+            padding: 12,
+            cornerRadius: 8
+        }
+    }
     }
 });
     });

@@ -741,3 +741,18 @@ font-size:14px;
     font-weight:700;
 
 }
+.chart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+}
+
+.chart-header select{
+padding:8px 12px;
+border-radius:8px;
+border:1px solid #ddd;
+background:#fff;
+cursor:pointer;
+font-size:14px;
+}
